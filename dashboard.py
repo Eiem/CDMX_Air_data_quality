@@ -51,9 +51,7 @@ st.sidebar.markdown("""
     - PM25: Párticulas menores a 2.5 micras
     - PM10: Párticulas menores a 10 micras
     - Dióxido de Azufre
-    
-    **Nota**: Las gráficas pueden tardar un poco en cargar debido al cálculo que debe realizarse para mostrar 
-    predicciones en la gráfica de la tendencia mensual
+
 """)
 
 # 
