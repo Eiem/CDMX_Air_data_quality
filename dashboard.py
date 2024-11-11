@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from pmdarima import auto_arima
+#from pmdarima import auto_arima
 from statsmodels.tsa.stattools import adfuller
 from datetime import timedelta
 
@@ -123,7 +123,7 @@ specific_years = [2020, 2021, 2023]
 month_names = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 
 # Forecast config
-forecast_periods = 12  # Number of months to forecast (one year)
+#forecast_periods = 12  # Number of months to forecast (one year)
 
 # Plot for each pollutant
 for pollutant in selected_pollutants:
@@ -137,31 +137,31 @@ for pollutant in selected_pollutants:
     ax.plot(monthly_avg.index, monthly_avg[pollutant], color='blue', label='Tendencia mensual')
 
     # Prepare data for forecasting
-    df_resampled = df[pollutant].resample('ME').mean()
+    #df_resampled = df[pollutant].resample('ME').mean()
     
-    result = adfuller(df_resampled.dropna())
-    st.write(f"{pollutant} - ADF Statistic: {result[0]}, p-value: {result[1]}")
+    #result = adfuller(df_resampled.dropna())
+    #st.write(f"{pollutant} - ADF Statistic: {result[0]}, p-value: {result[1]}")
     
-    if result[1] > 0.05:  # If p-value > 0.05
-        df_resampled_diff = df_resampled.diff().dropna()
-    else:
-        df_resampled_diff = df_resampled
+    #if result[1] > 0.05:  # If p-value > 0.05
+        #df_resampled_diff = df_resampled.diff().dropna()
+    #else:
+        #df_resampled_diff = df_resampled
     
     # Fit ARIMA
-    try:
-        model = auto_arima(df_resampled_diff, seasonal=True, m=12, stepwise=True, trace=True)
+    #try:
+        #model = auto_arima(df_resampled_diff, seasonal=True, m=12, stepwise=True, trace=True)
         
         # forecast
-        forecast = model.predict(n_periods=forecast_periods)
-        forecast_index = pd.date_range(df.index[-1] + timedelta(days=1), periods=forecast_periods, freq='ME')
+        #forecast = model.predict(n_periods=forecast_periods)
+        #forecast_index = pd.date_range(df.index[-1] + timedelta(days=1), periods=forecast_periods, freq='ME')
         
-        if result[1] > 0.05:
-            forecast = forecast.cumsum() + df_resampled.iloc[-1] 
+        #if result[1] > 0.05:
+            #forecast = forecast.cumsum() + df_resampled.iloc[-1] 
 
         # Plot forecast
-        ax.plot(forecast_index, forecast, color='red', linestyle='--', label='Pronóstico 2024')
-    except Exception as e:
-        st.write(f"ARIMA model failed for {pollutant} due to: {e}")
+        #ax.plot(forecast_index, forecast, color='red', linestyle='--', label='Pronóstico 2024')
+    #except Exception as e:
+        #st.write(f"ARIMA model failed for {pollutant} due to: {e}")
 
     ax.set_title("Datos diarios con tenedencia mensual y pronóstico")
     ax.set_ylabel(f"{pollutant} ppm")
