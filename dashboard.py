@@ -16,7 +16,7 @@ def load_data(path):
     return df
 
 # File Path
-data_path = './rama_2023_05 (1).csv'
+data_path = 'https://github.com/Eiem/CDMX_Air_data_quality/blob/main/rama_2023_05.csv'
 df = load_data(data_path)
 
 # Streamlit App
