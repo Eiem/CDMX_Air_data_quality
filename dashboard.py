@@ -9,15 +9,15 @@ from datetime import timedelta
 
 # Load data
 @st.cache_data
-def load_data(path):
-    df = pd.read_csv(path, parse_dates=['fecha'], dayfirst=True)
+def load_data(url):
+    df = pd.read_csv(url, parse_dates=['fecha'], dayfirst=True)
     df['fecha'] = pd.to_datetime(df['fecha'], errors='coerce')
     df.set_index('fecha', inplace=True)
     return df
 
 # File Path
-data_path = 'https://github.com/Eiem/CDMX_Air_data_quality/blob/main/rama_2023_05.csv'
-df = load_data(data_path)
+data_url = 'rama_2023_05.csv'
+df = load_data(data_url)
 
 # Streamlit App
 st.title("Calidad del Aire en la CDMX (2015-2023)")
